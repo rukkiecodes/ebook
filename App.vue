@@ -5,6 +5,28 @@
         :style="{ width: '100%', height: '90%', marginTop: -80 }"
         :source="require('./assets/images/bg.jpg')"
       >
+      <view :style="{
+            width: '100%',
+            top: 120,
+            alignItems: 'flex-start',
+            justifyContent: 'center',
+            padding: 20,
+          }">
+          <touchable-opacity
+          :style="{
+            backgroundColor: 'transparent',
+            width: '15%',
+            height: 45,
+            alignItems: 'center',
+            justifyContent: 'center',
+          }"
+          :on-press="onPressButton"
+        >
+        <image
+          :source="require('./assets/images/arrow-left.png')"
+        />
+        </touchable-opacity>
+      </view>
         <view
           :style="{
             width: '100%',
@@ -90,6 +112,7 @@
 </template>
 
 <script>
+import { Alert } from 'react-native';
 export default {
   data: () => ({
     message: "Hello world",
@@ -97,6 +120,8 @@ export default {
       email: "",
       password: "",
     },
+
+    back_button_text: "<"
   }),
 
   methods: {
@@ -105,7 +130,16 @@ export default {
     },
 
     onPressButton: function () {
-      alert("Clicked Image");
+      Alert.alert(
+          'Alert Title',
+          'My Alert Msg',
+          [
+              {text: 'Ask me later', onPress: () => console.log('Ask me later pressed')},
+              {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+              {text: 'OK', onPress: () => console.log('OK Pressed')},
+          ],
+          { cancelable: false }
+      );
     },
   },
 };
